@@ -1,0 +1,1260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dilip IAS</title>
+    <!-- Load Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Configure Tailwind for Inter font and custom colors -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        // Defined colors
+                        'primary-dark': '#1e2022',
+                        'accent-orange': '#ff9900',
+                        'light-bg': '#f7f9fb',
+                        'subtle-gray': '#e5e7eb',
+                        'cta-yellow': '#ff9900',
+                        'success': '#10b981', // Tailwind green-500
+                        'error': '#ef4444',   // Tailwind red-500
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Custom scrollbar to match dark theme */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #2d3748; /* Dark track */
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #4a5568; /* Darker thumb */
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #5a6468;
+        }
+
+        /* Utility class to keep text visually hidden but accessible */
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border-width: 0;
+        }
+        
+        /* Modal backdrop styles */
+        .modal-backdrop {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(3px); /* Subtle blur effect */
+        }
+
+        /* Modal content animation (NEW) */
+        .modal-content-enter {
+            animation: modal-open 0.3s ease-out;
+        }
+
+        @keyframes modal-open {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-white text-gray-800 font-sans">
+
+    <!-- Header / Navbar -->
+    <header class="sticky top-0 z-50 bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
+            
+            <!-- Logo Section: Stylized Book and Achievement Star SVG -->
+            <div class="flex items-center">
+                <svg class="w-8 h-8 mr-2" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"> 
+                    <!-- Book Base (Dark - representing foundational knowledge) -->
+                     <path d="M4 19H20V5H4V19ZM12 5V19" fill="none" stroke="#1e2022" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/> -->
+                    <!-- Rising Arc of Achievement (Orange - representing the journey/aspiration) -->
+                     <path d="M8 8C9 6 11 5 12 5M12 5C13 5 15 6 16 8" fill="none" stroke="#ff9900" stroke-width="2.5" stroke-linecap="round"/> --> -->
+                    <!-- Star/Excellence (Orange - representing the goal/success) -->
+                     <circle cx="12" cy="3" r="1.5" fill="#ff9900"/>  
+                 </svg> 
+                <!-- Brand Name -->
+                <div class="text-2xl font-extrabold text-primary-dark tracking-tight">Dilip IAS</div>
+            </div>
+
+            <!-- Navigation Links (Desktop) -->
+            <nav class="hidden md:flex space-x-8 items-center text-sm font-medium">
+                
+                <!-- Syllabus Dropdown Container -->
+                <div class="relative group">
+                    <div class="text-gray-600 hover:text-accent-orange transition duration-200 flex items-center cursor-default">
+                        Syllabus
+                        <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="absolute top-full left-1/2 transform -translate-x-1/2 w-48 bg-white rounded-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50 border border-gray-100">
+                        <a href="#" onclick="showSyllabusView('psir'); closeMobileMenu(); return false;" class="block px-4 py-2 text-sm text-gray-700 hover:bg-light-bg hover:text-accent-orange transition duration-150 rounded-md mx-2 font-medium">PSIR Optional</a>
+                        <a href="#" onclick="showSyllabusView('general-studies'); closeMobileMenu(); return false;" class="block px-4 py-2 text-sm text-gray-700 hover:bg-light-bg hover:text-accent-orange transition duration-150 rounded-md mx-2 font-medium">General Studies</a>
+                    </div>
+                </div>
+                
+                <a href="#" onclick="showBookListView(); return false;" class="text-gray-600 hover:text-accent-orange transition duration-200">Book List</a>
+                
+                <a href="#" class="text-gray-600 hover:text-accent-orange transition duration-200">FAQ</a>
+                
+                <!-- Admin/Logout Button (Dynamic) -->
+                <button id="admin-logout-button-desktop" 
+                    class="ml-6 px-5 py-2 bg-accent-orange text-white text-sm font-semibold rounded-full shadow-lg hover:bg-opacity-90 transform hover:scale-105 transition duration-300 ease-in-out"
+                    onclick="handleAdminClick()">
+                    Admin
+                </button>
+            </nav>
+
+            <!-- Mobile Menu Button -->
+            <button id="menu-button" onclick="toggleMobileMenu()" class="md:hidden text-primary-dark focus:outline-none p-2 rounded-lg hover:bg-gray-100">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path id="menu-icon" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+        </div>
+
+        <!-- Mobile Menu Content (Initially hidden) -->
+        <div id="mobile-menu" class="hidden md:hidden bg-light-bg w-full shadow-inner border-t border-gray-200">
+            <div class="px-2 pt-2 pb-3 space-y-1 sm:px-3 text-center">
+                <!-- Links replicated from desktop -->
+                <a href="#" onclick="showSyllabusView('psir'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">PSIR Optional Syllabus</a>
+                <a href="#" onclick="showSyllabusView('general-studies'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">General Studies Syllabus</a>
+                <a href="#" onclick="showBookListView(); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">Book List</a>
+                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">FAQ</a>
+                <!-- Admin/Logout Button (Dynamic) -->
+                <button id="admin-logout-button-mobile" 
+                    class="w-full mt-2 px-5 py-2 bg-accent-orange text-white text-base font-semibold rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300 ease-in-out" 
+                    onclick="handleAdminClick(); closeMobileMenu();">
+                    Admin
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Container -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+
+        <!-- 1. LANDING PAGE CONTENT (Initially visible) -->
+        <div id="main-landing-content">
+             <!-- Hero Section (REDESIGNED) -->
+             <!-- Hero Section (Color Scheme Adjusted to Custom Palette) -->
+             <section class="bg-primary-dark text-white py-20 md:py-32 overflow-hidden rounded-b-3xl shadow-2xl">
+                <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+                    <!-- Content Column -->
+                    <div class="text-center md:text-left">
+                        <span class="text-base font-semibold uppercase tracking-widest text-accent-orange block mb-3">
+                            Your Path to Civil Service
+                        </span>
+                        <h1 class="text-5xl sm:text-6xl lg:text-7xl font-extrabold mb-4 leading-tight">
+                            Dilip <span class="text-cta-yellow">IAS</span>
+                        </h1>
+                        <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-lg md:max-w-full">
+                            Master the UPSC Civil Services Examination with expert guidance, personalized strategies, and a proven track record of success.
+                        </p>
+                        <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="#register" class="inline-block bg-cta-yellow text-primary-dark font-extrabold text-xl py-4 px-10 rounded-full shadow-2xl transition duration-300 transform hover:scale-105 hover:bg-accent-orange">
+                                Enroll Today
+                            </a>
+                        </div>
+                    </div>
+
+                    <!-- Image/Visual Column -->
+                    <div class="justify-center md:justify-end hidden md:flex">
+                        <div class="relative p-4 rounded-3xl bg-primary-dark shadow-2xl shadow-black/30 transform transition duration-500 hover:rotate-1 hover:scale-[1.02]">
+                    
+                            <picture>
+                                <source media="(min-width: 768px)" srcset="Images/upsc-wallpaper.jpg">
+                                <img class="w-full max-w-xs md:max-w-md h-auto rounded-2xl object-cover border-4 border-cta-yellow"
+                                     src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7"
+                                     onerror="this.onerror=null; this.src='https://placehold.co/400x250/1e2022/ffffff?text=Vision+for+India';"
+                                     alt="Visual representing the UPSC journey"
+                                     loading="lazy">
+                            </picture>
+                            
+                            <div class="absolute -bottom-4 -left-4 bg-cta-yellow w-16 h-16 rounded-full flex items-center justify-center text-xl font-bold text-primary-dark shadow-xl">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 24 24" fill="currentColor">
+                                    <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+                                </svg>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <!-- End Hero Section -->
+            
+            <div class="space-y-20">
+                <!-- PSIR Notes Section (Main Subject Clickable) -->
+                <section class="py-12">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-primary-dark mb-10 tracking-tight">PSIR Notes</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                        
+                        <!-- Card 1: Political Science -->
+                        <div onclick="showSubjectNotes('political-science')" class="group bg-light-bg p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition duration-300 ease-in-out border border-gray-100 cursor-pointer">
+                            <div class="overflow-hidden mb-4 rounded-xl">
+                                <img src="Images/PS.png" 
+                                    alt="Political Science Notes Icon Placeholder" 
+                                    class="w-full h-50 object-cover rounded-xl group-hover:scale-105 transition duration-500"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/300x200/e0e0e0/555?text=Image';"
+                                />
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-dark mb-2 group-hover:text-accent-orange transition duration-300">Political Science</h3>
+                            <p class="text-gray-600 text-sm">Brief summary of whatever you'd like to add more to the main point. 3 previous details.</p>
+                        </div>
+                        
+                        <!-- Card 2: International Relations -->
+                        <div onclick="showSubjectNotes('international-relations')" class="group bg-light-bg p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition duration-300 ease-in-out border border-gray-100 cursor-pointer">
+                            <div class="overflow-hidden mb-4 rounded-xl">
+                                <img src="Images/IR.png" 
+                                    alt="International Relations Notes Icon Placeholder" 
+                                    class="w-full h-50 object-cover rounded-xl group-hover:scale-105 transition duration-500"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/300x200/e0e0e0/555?text=Image';"
+                                />
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-dark mb-2 group-hover:text-accent-orange transition duration-300">International Relations</h3>
+                            <p class="text-gray-600 text-sm">Brief summary of whatever you'd like to expand on the main point.</p>
+                        </div>
+                        
+                        <!-- Card 3: Current Affairs (Now dynamically updated via admin) -->
+                        <div onclick="showSubjectNotes('current-affairs')" class="group bg-light-bg p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition duration-300 ease-in-out border border-gray-100 cursor-pointer">
+                            <div class="overflow-hidden mb-4 rounded-xl">
+                                <img src="Images/CS.png" 
+                                    alt="Current Affairs Notes Icon Placeholder" 
+                                    class="w-full h-50 object-cover rounded-xl group-hover:scale-105 transition duration-500"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/300x200/e0e0e0/555?text=Image';"
+                                />
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-dark mb-2 group-hover:text-accent-orange transition duration-300">Current Affairs</h3>
+                            <p class="text-gray-600 text-sm">Monthly and annual analysis of national and international developments.</p>
+                        </div>
+                    </div>
+                </section>
+        
+                <!-- Other Notes Section -->
+                <section class="mb-20">
+                    <h2 class="text-2xl sm:text-3xl font-bold text-primary-dark mb-8 border-b-2 border-accent-orange pb-2 inline-block">Other Notes (General Studies)</h2>
+                    
+                    <div class="flex flex-col md:flex-row gap-12 items-start">
+                        <!-- Left Column: Notes List -->
+                        <div class="md:w-1/2">
+                            
+                            <div id="initial-other-notes" class="space-y-6">
+                                <div onclick="showSubjectNotes('polity')" class="note-item block p-4 bg-white rounded-xl hover:shadow-lg transition-transform-shadow cursor-pointer border-l-4 border-transparent hover:border-accent-orange">
+                                    <h3 class="text-xl font-bold text-primary-dark mb-1">Polity</h3>
+                                    <p class="text-gray-600 text-sm">Detailed notes on the Indian Constitution, Governance, and Political System.</p>
+                                </div>
+                                
+                                <div onclick="showSubjectNotes('ancient-history')" class="note-item block p-4 bg-white rounded-xl hover:shadow-lg transition-transform-shadow cursor-pointer border-l-4 border-transparent hover:border-accent-orange">
+                                    <h3 class="text-xl font-bold text-primary-dark mb-1">Ancient History</h3>
+                                    <p class="text-gray-600 text-sm">Study of the Harappan Civilization, Vedic Period, and major dynasties.</p>
+                                </div>
+                                
+                                <div onclick="showSubjectNotes('ethics')" class="note-item block p-4 bg-white rounded-xl hover:shadow-lg transition-transform-shadow cursor-pointer border-l-4 border-transparent hover:border-accent-orange">
+                                    <h3 class="text-xl font-bold text-primary-dark mb-1">Ethics</h3>
+                                    <p class="text-gray-600 text-sm">Case studies and theoretical frameworks for Ethics, Integrity, and Aptitude (GS Paper IV).</p>
+                                </div>
+                            </div>
+                            
+                            <!-- Buttons -->
+                            <div class="mt-8 flex space-x-4">
+                                <button onclick="showAllNotesList()" class="px-6 py-3 bg-accent-orange text-white font-semibold rounded-lg hover:bg-opacity-90 transform hover:scale-105 transition duration-300 ease-in-out">
+                                    View All Subjects
+                                </button>
+                                <!-- Admin Button to jump to Current Affairs Editor if logged in hover:bg-gray-700 transition duration-150 shadow-md">
+                                    View All Subjects-->
+                                <button id="admin-editor-quick-link" 
+                                    onclick="showEditNotesView()" 
+                                    class="px-6 py-3 border border-red-500 text-red-500 font-semibold rounded-lg hover:bg-red-50 transition duration-150 shadow-md hidden">
+                                    Edit CA Notes
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Right Column: Large Image -->
+                        <div id="study-container" class="md:w-1/2 w-full bg-gray-100 rounded-xl overflow-hidden shadow-lg h-96">
+                            <style>
+                                /* Default: hide the container on small screens */
+                                #study-container {
+                                    display: none;
+                                }
+                        
+                                /* Media query: display the container on screens wider than 768px */
+                                @media (min-width: 768px) {
+                                    #study-container {
+                                        display: block; 
+                                    }
+                                }
+                            </style>
+                            <img id="study-image" 
+                                src="Images/Notes1.png" 
+                                alt="Study Material Placeholder" 
+                                class="w-full h-full object-cover"/>
+                        </div>
+                        <!-- <div class="md:w-1/2 w-full bg-gray-100 rounded-xl overflow-hidden shadow-lg h-96">
+                            <img id="study-image" src="https://placehold.co/700x400/e0e0e0/555?text=Motivational+UPSC+study+desk+setup" 
+                                alt="Study Material Placeholder" 
+                                class="w-full h-full object-cover"/>
+                        </div> -->
+                    </div>
+                </section>
+        
+                <!-- Previous Year Questions Section -->
+                <section class="py-12 mb-20">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-primary-dark mb-10 tracking-tight">Previous Year Questions</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        
+                        <!-- PSIR PYQ Card (using subtle-gray bg for contrast) -->
+                        <div onclick="showSubjectNotes('pyq-psir')" class="group bg-subtle-gray p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition duration-300 ease-in-out border border-gray-200 cursor-pointer">
+                            <div class="overflow-hidden mb-4 rounded-xl">
+                                <img src="Images/PSIR PYQ image.png" 
+                                    alt="PSIR PYQs Placeholder Image" 
+                                    class="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition duration-500"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x200/e0e0e0/555?text=Image';"
+                                />
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-dark mb-2 group-hover:text-accent-orange transition duration-300">PSIR Optional PYQs</h3>
+                            <p class="text-gray-600 text-sm">Topic-wise compiled questions and model answers for PSIR Paper I & II (2013-2024).</p>
+                        </div>
+                        
+                        <!-- GS PYQ Card -->
+                        <div onclick="showSubjectNotes('pyq-gs-papers')" class="group bg-subtle-gray p-6 rounded-2xl shadow-xl hover:shadow-2xl hover:scale-[1.02] transition duration-300 ease-in-out border border-gray-200 cursor-pointer">
+                            <div class="overflow-hidden mb-4 rounded-xl">
+                                <img src="Images/GS PYQ image.png" 
+                                    alt="General Studies PYQs Placeholder Image" 
+                                    class="w-full h-48 object-cover rounded-xl group-hover:scale-105 transition duration-500"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/600x200/e0e0e0/555?text=Image';"
+                                />
+                            </div>
+                            <h3 class="text-xl font-bold text-primary-dark mb-2 group-hover:text-accent-orange transition duration-300">General Studies - All Papers</h3>
+                            <p class="text-gray-600 text-sm">Access to compiled PYQs for GS Paper I, II, III, and IV, including essay topics.</p>
+                        </div>
+                    </div>
+                    
+                    <!-- View All PYQs Button -->
+                    <div class="mt-12 flex justify-center">
+                        <button onclick="showAllPyqList()" class="px-8 py-3 bg-accent-orange text-white text-md font-bold rounded-full shadow-lg hover:bg-opacity-90 transform hover:scale-105 transition duration-300 ease-in-out">
+                            View All Subject-wise PYQs
+                        </button>
+                    </div>
+                </section>
+
+                <!-- Testimonials Section -->
+                <section class="py-12 bg-subtle-gray -mx-4 sm:-mx-6 lg:-mx-8 px-4 sm:px-6 lg:px-8 rounded-t-2xl">
+                    <h2 class="text-3xl sm:text-4xl font-extrabold text-primary-dark mb-10 tracking-tight">Testimonials</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                        
+                        <!-- Testimonial 1 -->
+                        <div class="p-6 bg-white rounded-2xl shadow-lg border-t-4 border-accent-orange">
+                            <p class="text-base italic text-gray-700 mb-4 leading-relaxed">"This part is for testimonials from students"</p>
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/48x48/e0e0e0/555?text=Dilip+IAS" 
+                                    alt="Avatar Placeholder" 
+                                    class="w-12 h-12 rounded-full mr-3 border-2 border-accent-orange p-[2px]"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/48x48/e0e0e0/555?text=A';"
+                                />
+                                <div>
+                                    <p class="font-bold text-primary-dark text-md">ABC</p>
+                                    <p class="text-sm text-gray-500">Alumnus/Student</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Testimonial 2 -->
+                        <div class="p-6 bg-white rounded-2xl shadow-lg border-t-4 border-accent-orange">
+                            <p class="text-base italic text-gray-700 mb-4 leading-relaxed">"This part is for testimonials from students"</p>
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/48x48/e0e0e0/555?text=Dilip+IAS" 
+                                    alt="Avatar Placeholder" 
+                                    class="w-12 h-12 rounded-full mr-3 border-2 border-accent-orange p-[2px]"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/48x48/e0e0e0/555?text=B';"
+                                />
+                                <div>
+                                    <p class="font-bold text-primary-dark text-md">ABC</p>
+                                    <p class="text-sm text-gray-500">Alumnus/Student</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Testimonial 3 -->
+                        <div class="p-6 bg-white rounded-2xl shadow-lg border-t-4 border-accent-orange">
+                            <p class="text-base italic text-gray-700 mb-4 leading-relaxed">"This part is for testimonials from students"</p>
+                            <div class="flex items-center">
+                                <img src="https://placehold.co/48x48/e0e0e0/555?text=Dilip+IAS" 
+                                    alt="Avatar Placeholder" 
+                                    class="w-12 h-12 rounded-full mr-3 border-2 border-accent-orange p-[2px]"
+                                    onerror="this.onerror=null;this.src='https://placehold.co/48x48/e0e0e0/555?text=C';"
+                                />
+                                <div>
+                                    <p class="font-bold text-primary-dark text-md">ABC</p>
+                                    <p class="text-sm text-gray-500">Alumnus/Student</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+        
+        <!-- 2. NOTES DETAIL VIEW (For individual subject notes OR PYQ detail) -->
+        <section id="notes-detail-view" class="pt-16 pb-20 hidden">
+            <button id="detail-back-button" onclick="showAllNotesList()" class="flex items-center text-accent-orange hover:text-primary-dark transition duration-150 mb-8 font-semibold">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                <span id="detail-back-text">Back</span>
+            </button>
+            
+            <h1 id="notes-title" class="text-4xl font-extrabold text-primary-dark mb-6"></h1>
+            <p class="text-xl text-gray-600 mb-10 border-b pb-4">Detailed notes and resources for the selected subject.</p>
+            
+            <div id="notes-content" class="space-y-8 text-gray-700 leading-relaxed">
+                <!-- Content will be injected here -->
+            </div>
+            
+            <div class="mt-12 p-6 bg-cta-yellow/10 border-l-4 border-cta-yellow rounded-lg text-sm text-gray-700">
+                <p class="font-semibold text-primary-dark">Disclaimer:</p>
+                <p>This content is a placeholder. In a real application, clicking these cards would initiate a complex database query to fetch extensive study material (PDFs, videos, and articles) for the chosen subject or PYQ set.</p>
+            </div>
+        </section>
+
+        <!-- 3. ALL NOTES LIST VIEW (For View All Subjects) -->
+        <section id="all-notes-list-view" class="pt-16 pb-20 hidden">
+            <button onclick="showLandingPage()" class="flex items-center text-accent-orange hover:text-primary-dark transition duration-150 mb-8 font-semibold">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Homepage
+            </button>
+            
+            <h1 class="text-4xl font-extrabold text-primary-dark mb-6">All UPSC Subjects</h1>
+            <p class="text-xl text-gray-600 mb-10 border-b pb-4">A complete list of study materials available for Civil Services preparation.</p>
+            
+            <div id="all-subjects-container" class="space-y-10">
+                <!-- Subject lists will be dynamically generated here by JS -->
+            </div>
+
+        </section>
+
+        <!-- 4. ALL PYQ LIST VIEW (For View All PYQs) -->
+        <section id="pyq-list-view" class="pt-16 pb-20 hidden">
+            <button onclick="showLandingPage()" class="flex items-center text-accent-orange hover:text-primary-dark transition duration-150 mb-8 font-semibold">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Homepage
+            </button>
+            
+            <h1 class="text-4xl font-extrabold text-primary-dark mb-6">All UPSC Previous Year Questions</h1>
+            <p class="text-xl text-gray-600 mb-10 border-b pb-4">Access topic-wise and paper-wise compilation of PYQs with model answers.</p>
+            
+            <div id="all-pyqs-container" class="space-y-10">
+                <!-- PYQ lists will be dynamically generated here by JS -->
+            </div>
+
+        </section>
+
+        <!-- 5. SYLLABUS VIEW -->
+        <section id="syllabus-view" class="pt-16 pb-20 hidden">
+            <button onclick="showLandingPage()" class="flex items-center text-accent-orange hover:text-primary-dark transition duration-150 mb-8 font-semibold">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Homepage
+            </button>
+            
+            <h1 id="syllabus-title" class="text-4xl font-extrabold text-primary-dark mb-6"></h1>
+            <p id="syllabus-subtitle" class="text-xl text-gray-600 mb-10 border-b pb-4">The definitive guide to your UPSC preparation roadmap.</p>
+            
+            <div id="syllabus-content" class="space-y-8 text-gray-700 leading-relaxed bg-light-bg p-6 rounded-xl shadow-lg">
+                <!-- Syllabus content will be injected here -->
+            </div>
+            
+        </section>
+
+        <!-- 6. BOOK LIST VIEW -->
+        <section id="book-list-view" class="pt-16 pb-20 hidden">
+            <button onclick="showLandingPage()" class="flex items-center text-accent-orange hover:text-primary-dark transition duration-150 mb-8 font-semibold">
+                <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+                Back to Homepage
+            </button>
+            
+            <h1 class="text-4xl font-extrabold text-primary-dark mb-6">UPSC Essential Book List</h1>
+            <p class="text-xl text-gray-600 mb-10 border-b pb-4">Subject-wise recommended readings for the Civil Services Examination.</p>
+            
+            <div id="book-list-content" class="space-y-12 text-gray-700 leading-relaxed">
+                <!-- Book list content will be injected here -->
+            </div>
+            
+        </section>
+        
+        <!-- 7. NEW: EDIT NOTES SECTION (ADMIN ONLY) -->
+        <section id="edit-notes-section" class="pt-16 pb-20 hidden">
+            <h1 class="text-4xl font-extrabold text-primary-dark mb-2">Admin Panel: Current Affairs Editor</h1>
+            <p class="text-xl text-gray-600 mb-10 border-b pb-4">Manage the dynamic 'Current Affairs' content. <span class="text-red-600 font-semibold">PIN: 8169</span></p>
+
+            <!-- Add New Note Form -->
+            <div class="bg-white p-6 rounded-xl shadow-2xl mb-12 border-t-8 border-success/70 hover:shadow-3xl transition duration-300">
+                <h2 class="text-2xl font-bold text-success mb-4 flex items-center">
+                    <svg class="w-6 h-6 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v3m0 0v3m0-3h3m-3 0H9m12 0a9 9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                    Add New Note
+                </h2>
+                <form id="add-note-form" onsubmit="event.preventDefault(); addNote();">
+                    <div class="mb-4">
+                        <label for="new-title" class="block text-sm font-bold text-primary-dark mb-1">Title</label>
+                        <input type="text" id="new-title" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-orange focus:border-accent-orange transition duration-150 shadow-sm" required>
+                    </div>
+                    <div class="mb-6">
+                        <label for="new-content" class="block text-sm font-bold text-primary-dark mb-1">Content/Summary</label>
+                        <textarea id="new-content" rows="3" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-accent-orange focus:border-accent-orange transition duration-150 shadow-sm" required></textarea>
+                    </div>
+                    <button type="submit" class="w-full md:w-auto px-6 py-3 bg-success text-white font-bold rounded-lg hover:bg-green-600 transition duration-150 shadow-lg transform hover:scale-[1.01]">
+                        Save New Current Affairs Note
+                    </button>
+                </form>
+            </div>
+
+            <!-- Existing Notes List -->
+            <h2 class="text-3xl font-bold text-primary-dark mb-6">Existing Current Affairs Notes</h2>
+            <div id="current-affairs-admin-list" class="space-y-6">
+                <!-- Editable notes will be rendered here -->
+            </div>
+        </section>
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-primary-dark text-gray-300 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-y-10 gap-x-8 border-b border-gray-700 pb-10 mb-10">
+                
+                <!-- Column 1: Logo & Social -->
+                <div>
+                    <h3 class="text-2xl font-extrabold text-white mb-4 tracking-tight">Dilip IAS</h3>
+                    <p class="text-sm mb-6 text-gray-400">Your single source for Civil Services success.</p>
+                    <div class="flex space-x-4 text-xl">
+                        <!-- Placeholder for social icons (using simple letters as stand-ins for icons) -->
+                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="Facebook">F</a>
+                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="Twitter">T</a>
+                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="Instagram">I</a>
+                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="YouTube">Y</a>
+                    </div>
+                </div>
+
+                <!-- Column 2: Pages -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Company</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">About Us</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Contact</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Careers</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Blog</a></li>
+                    </ul>
+                </div>
+                
+                <!-- Column 3: Resources -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Resources</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" onclick="showSyllabusView('general-studies'); return false;" class="hover:text-accent-orange transition duration-150">Syllabus Guide</a></li>
+                        <li><a href="#" onclick="showBookListView(); return false;" class="hover:text-accent-orange transition duration-150">Book List</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">PYQ Analysis</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Test Series</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 4: Support -->
+                <div>
+                    <h4 class="text-lg font-bold text-white mb-4">Support</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">FAQ</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Help Center</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Terms of Service</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Privacy Policy</a></li>
+                    </ul>
+                </div>
+
+                <!-- Column 5: Legal -->
+                <div class="col-span-2 md:col-span-1">
+                    <h4 class="text-lg font-bold text-white mb-4">Legal</h4>
+                    <ul class="space-y-3 text-sm">
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Disclaimers</a></li>
+                        <li><a href="#" class="hover:text-accent-orange transition duration-150">Affiliate T&C</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Copyright -->
+            <div class="text-center text-sm text-gray-500 pt-4">
+                &copy; 2025 Dilip IAS. All rights reserved. Powered by Excellence.
+            </div>
+        </div>
+    </footer>
+
+    <!-- NEW: Admin Login Modal -->
+    <div id="admin-modal" class="modal-backdrop">
+        <div id="modal-content-card" class="modal-content-enter bg-white p-8 rounded-xl shadow-2xl w-full max-w-sm transform transition duration-300">
+            <div class="text-center mb-4">
+                <svg class="w-10 h-10 mx-auto text-accent-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2v5a2 2 0 01-2 2h-1a1 1 0 00-1 1v2a1 1 0 001 1h2a2 2 0 002-2V9a2 2 0 00-2-2m-2-2h-3v5l-3 3-3-3V5H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2h-3z"></path></svg>
+            </div>
+            <h2 class="text-2xl font-bold text-primary-dark mb-2 text-center">Admin Login</h2>
+            <p class="text-gray-600 mb-6 text-center text-sm">Enter the 4-digit security PIN to access the editor.</p>
+            <input type="password" id="admin-pin-input" placeholder="••••" maxlength="4" class="w-full p-4 border-2 border-gray-300 rounded-lg text-center text-2xl tracking-widest font-mono focus:border-accent-orange focus:ring-4 focus:ring-accent-orange/20 transition duration-150 mb-6 shadow-inner" onkeypress="if(event.key === 'Enter') checkAdminPin()">
+            <div class="flex justify-between space-x-3">
+                <button onclick="document.getElementById('admin-modal').style.display = 'none';" class="flex-1 px-4 py-3 border border-gray-300 text-gray-700 rounded-lg hover:bg-light-bg transition duration-150 font-semibold shadow-sm">
+                    Cancel
+                </button>
+                <button onclick="checkAdminPin()" class="flex-1 px-4 py-3 bg-accent-orange text-white font-bold rounded-lg hover:bg-opacity-90 transition duration-150 shadow-md transform hover:scale-[1.01]">
+                    Login
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- NEW: Custom Alert Toast -->
+    <div id="alert-toast" class="fixed bottom-5 right-5 z-50 transition-all duration-300 transform translate-x-full opacity-0">
+        <div id="alert-content" class="px-6 py-4 rounded-xl shadow-2xl text-white flex items-center space-x-3 min-w-[250px] border-l-8">
+            <span id="alert-icon"></span>
+            <span id="alert-text" class="font-semibold"></span>
+        </div>
+    </div>
+
+    <!-- JavaScript for View Switching and Placeholder Data -->
+    <script>
+        // --- Globals ---
+        const ADMIN_PIN = "8169";
+        let isUserAdmin = false;
+        let isMenuOpen = false;
+
+        // Separate mutable Current Affairs data (simulating database storage)
+        let currentAffairsList = [
+            { id: 1678886400000, title: 'Monthly Compilation: Sep 2025', content: 'Key events of September covering economy and international issues. This is placeholder content that can be easily updated by the admin.' },
+            { id: 1679059200000, title: 'Economic Survey Analysis 2024-25', content: 'Chapter-wise summary of the latest Economic Survey, focusing on fiscal deficit and monetary policy.' },
+        ];
+        // Use Date.now() for unique IDs that won't clash on load, useful for CRUD operations
+        let nextNoteId = Date.now(); 
+
+        // --- Custom Alert/Message Toast ---
+        const ALERT_ICONS = {
+            success: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>`,
+            error: `<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>`
+        };
+
+        function alertMessage(message, isError = false) {
+            const toast = document.getElementById('alert-toast');
+            const content = document.getElementById('alert-content');
+            const text = document.getElementById('alert-text');
+            const icon = document.getElementById('alert-icon');
+            
+            if (!toast || !content || !text || !icon) return;
+
+            // Set message, icon, and style
+            const type = isError ? 'error' : 'success';
+            
+            text.textContent = message;
+            icon.innerHTML = ALERT_ICONS[type];
+
+            content.className = ''; // Clear existing classes
+            content.classList.add(
+                'px-6', 'py-4', 'rounded-xl', 'shadow-2xl', 'text-white', 'flex', 
+                'items-center', 'space-x-3', 'min-w-[250px]', 'border-l-8'
+            );
+            
+            if (isError) {
+                content.classList.add('bg-error', 'border-red-800');
+            } else {
+                content.classList.add('bg-success', 'border-green-800');
+            }
+
+            // Show the toast
+            toast.classList.remove('translate-x-full', 'opacity-0');
+            toast.classList.add('translate-x-0', 'opacity-100');
+
+            // Hide after 4 seconds
+            setTimeout(() => {
+                toast.classList.remove('translate-x-0', 'opacity-100');
+                toast.classList.add('translate-x-full', 'opacity-0');
+            }, 4000);
+        }
+
+        // --- Admin/Auth Logic ---
+        
+        // Updates the text and behavior of the Admin/Logout buttons
+        function updateAdminState(isAdmin) {
+            isUserAdmin = isAdmin;
+            const desktopBtn = document.getElementById('admin-logout-button-desktop');
+            const mobileBtn = document.getElementById('admin-logout-button-mobile');
+            const quickLink = document.getElementById('admin-editor-quick-link');
+            
+            if (isAdmin) {
+                desktopBtn.textContent = "Logout";
+                mobileBtn.textContent = "Logout";
+                quickLink.classList.remove('hidden');
+                alertMessage("Admin Login Successful!", false);
+            } else {
+                desktopBtn.textContent = "Admin";
+                mobileBtn.textContent = "Admin";
+                quickLink.classList.add('hidden');
+            }
+        }
+        
+        // Handles click on the main Admin/Logout button
+        function handleAdminClick() {
+            if (isUserAdmin) {
+                logout();
+            } else {
+                showAdminLoginModal();
+            }
+        }
+
+        function showAdminLoginModal() {
+            const modal = document.getElementById('admin-modal');
+            const input = document.getElementById('admin-pin-input');
+            if (modal) {
+                modal.style.display = 'flex';
+                input.value = ''; // Clear previous input
+                input.focus();
+            }
+        }
+
+        function checkAdminPin() {
+            const input = document.getElementById('admin-pin-input');
+            const pin = input ? input.value : '';
+            const modal = document.getElementById('admin-modal');
+
+            if (pin === ADMIN_PIN) {
+                if (modal) modal.style.display = 'none';
+                updateAdminState(true);
+                showEditNotesView(); // Immediately take admin to the editor
+            } else {
+                alertMessage("Invalid PIN. Please try again.", true);
+                input.value = '';
+                input.focus();
+            }
+        }
+
+        function logout() {
+            updateAdminState(false);
+            showLandingPage();
+            alertMessage("Logged out successfully.", false);
+        }
+
+        // --- Data & Rendering Logic for Current Affairs (CRUD) ---
+        
+        // Finds the Current Affairs object for display/updates
+        function getSubjectNotesData(subjectKey) {
+            // Static content lookup
+            const staticData = NOTE_DETAIL_DATA[subjectKey];
+
+            if (subjectKey === 'current-affairs') {
+                // Dynamic content generation for Current Affairs
+                let content = `<h3 class="text-2xl font-bold text-primary-dark mb-4">Latest Current Affairs Notes</h3>`;
+                
+                if (currentAffairsList.length === 0) {
+                    content += '<p class="text-lg text-gray-500 italic">No Current Affairs notes have been added yet.</p>';
+                } else {
+                    currentAffairsList.sort((a, b) => b.id - a.id); // Show latest first (using ID as timestamp)
+                    currentAffairsList.forEach(note => {
+                        // Formatting the ID for display
+                        const date = new Date(note.id);
+                        const dateStr = date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+                        content += `
+                            <div class="p-4 border-l-4 border-accent-orange bg-light-bg rounded-xl shadow-sm mt-4">
+                                <h4 class="text-xl font-semibold text-primary-dark">${note.title} <span class="text-xs text-gray-500 ml-2">(Published: ${dateStr})</span></h4>
+                                <p class="text-gray-700 mt-1 text-sm">${note.content.substring(0, 150)}...</p>
+                            </div>
+                        `;
+                    });
+                }
+
+                return {
+                    title: 'Current Affairs: Monthly & Annual Analysis for UPSC',
+                    category: 'General Studies (GS)',
+                    description: 'Monthly and annual analysis of national and international developments.',
+                    content: content
+                };
+            }
+            
+            return staticData;
+        }
+
+        function renderCurrentAffairsAdminList() {
+            const container = document.getElementById('current-affairs-admin-list');
+            if (!container) return;
+
+            container.innerHTML = '';
+            
+            if (currentAffairsList.length === 0) {
+                 container.innerHTML = '<p class="text-lg text-gray-500 italic p-6 bg-light-bg rounded-xl shadow border-l-4 border-gray-400">No notes to display. Add one above!</p>';
+                 return;
+            }
+
+            currentAffairsList.sort((a, b) => b.id - a.id); // Sort by ID descending (newest first)
+
+            currentAffairsList.forEach(note => {
+                const noteElement = document.createElement('div');
+                noteElement.id = `admin-note-${note.id}`;
+                noteElement.classList.add('bg-white', 'p-6', 'rounded-xl', 'shadow-xl', 'border-l-8', 'border-accent-orange', 'space-y-4', 'hover:shadow-2xl', 'transition', 'duration-300');
+                
+                // Format date for better readability
+                const date = new Date(note.id);
+                const dateStr = date.toLocaleDateString('en-US', { day: 'numeric', month: 'short', year: 'numeric' });
+
+                noteElement.innerHTML = `
+                    <div class="flex justify-between items-center border-b pb-3 border-gray-100">
+                        <h4 class="text-xl font-bold text-primary-dark">Note ID: <span class="text-accent-orange">${note.id}</span></h4>
+                        <button onclick="deleteNote(${note.id})" class="flex items-center px-4 py-2 text-sm bg-error text-white rounded-lg hover:bg-red-700 transition duration-150 font-semibold shadow-md">
+                            <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"></path></svg>
+                            Delete
+                        </button>
+                    </div>
+                    <div>
+                        <label for="title-${note.id}" class="block text-sm font-bold text-gray-700 mb-1">Title</label>
+                        <input type="text" id="title-${note.id}" value="${note.title}" class="w-full p-2 border border-gray-300 rounded-lg mt-1 focus:ring-accent-orange focus:border-accent-orange transition duration-150">
+                    </div>
+                    <div>
+                        <label for="content-${note.id}" class="block text-sm font-bold text-gray-700 mb-1">Content</label>
+                        <textarea id="content-${note.id}" rows="4" class="w-full p-2 border border-gray-300 rounded-lg mt-1 focus:ring-accent-orange focus:border-accent-orange transition duration-150">${note.content}</textarea>
+                    </div>
+                    <div class="text-right text-xs text-gray-500 italic mb-3">Created/Last Edited: ${dateStr}</div>
+                    <button onclick="editNote(${note.id})" class="w-full px-4 py-2 bg-cta-yellow text-white font-bold rounded-lg hover:bg-opacity-90 transition duration-150 shadow-md transform hover:scale-[1.005]">
+                        Save Changes
+                    </button>
+                `;
+                container.appendChild(noteElement);
+            });
+        }
+
+        function addNote() {
+            const titleInput = document.getElementById('new-title');
+            const contentInput = document.getElementById('new-content');
+
+            if (!titleInput.value || !contentInput.value) {
+                alertMessage("Title and Content cannot be empty.", true);
+                return;
+            }
+
+            const newNote = {
+                id: Date.now(), // Use fresh timestamp for new ID
+                title: titleInput.value,
+                content: contentInput.value
+            };
+
+            currentAffairsList.push(newNote);
+            titleInput.value = '';
+            contentInput.value = '';
+
+            renderCurrentAffairsAdminList();
+            alertMessage("New note successfully added!");
+        }
+
+        function editNote(id) {
+            const index = currentAffairsList.findIndex(note => note.id === id);
+            
+            if (index === -1) {
+                alertMessage("Error: Note not found.", true);
+                return;
+            }
+
+            const newTitle = document.getElementById(`title-${id}`).value;
+            const newContent = document.getElementById(`content-${id}`).value;
+
+            if (!newTitle || !newContent) {
+                alertMessage("Title and Content cannot be empty.", true);
+                return;
+            }
+            
+            currentAffairsList[index].title = newTitle;
+            currentAffairsList[index].content = newContent;
+
+            // Re-render to update the "Created/Last Edited" timestamp appearance
+            renderCurrentAffairsAdminList();
+            alertMessage("Note updated successfully!");
+        }
+
+        function deleteNote(id) {
+            // Since alert/confirm are blocked, a user can't truly confirm deletion here. 
+            // We'll proceed with deletion immediately, assuming the button click is the intent, 
+            // and use the custom alert for feedback.
+            
+            const initialLength = currentAffairsList.length;
+            currentAffairsList = currentAffairsList.filter(note => note.id !== id);
+            
+            if (currentAffairsList.length < initialLength) {
+                renderCurrentAffairsAdminList();
+                alertMessage("Note deleted successfully!", true); // Use error style for deletion action
+            } else {
+                alertMessage("Error deleting note. Note not found.", true);
+            }
+        }
+
+
+        // --- View Switching Logic (Retained for completeness) ---
+        
+        /** Utility to hide all dynamic content views */
+        function hideAllViews() {
+            document.getElementById('main-landing-content').classList.add('hidden');
+            document.getElementById('notes-detail-view').classList.add('hidden');
+            document.getElementById('all-notes-list-view').classList.add('hidden');
+            document.getElementById('pyq-list-view').classList.add('hidden');
+            document.getElementById('syllabus-view').classList.add('hidden'); 
+            document.getElementById('book-list-view').classList.add('hidden');
+            document.getElementById('edit-notes-section').classList.add('hidden'); 
+        }
+
+        /** Hides all dynamic views and shows only the main landing page. */
+        function showLandingPage() {
+            hideAllViews();
+            document.getElementById('main-landing-content').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        /** Shows the dedicated Admin Edit Notes view. */
+        function showEditNotesView() {
+            if (!isUserAdmin) {
+                showAdminLoginModal();
+                return;
+            }
+            hideAllViews();
+            renderCurrentAffairsAdminList();
+            document.getElementById('edit-notes-section').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /**
+         * Shows the dedicated notes detail page for a subject/PYQ.
+         * Now uses getSubjectNotesData to handle dynamic CA content.
+         */
+        function showSubjectNotes(subjectKey) {
+            const data = getSubjectNotesData(subjectKey);
+            
+            if (!data) {
+                console.error("No data found for subject:", subjectKey);
+                return;
+            }
+
+            // Determine where the user is coming from to set the back button action
+            let backAction = 'showLandingPage()';
+            let backText = 'Back to Homepage';
+
+            // Check if subject is from the all notes list or PYQ list
+            const allSubjectsKeys = Object.values(ALL_SUBJECT_KEYS).flat();
+            const allPyqKeys = Object.values(ALL_PYQ_KEYS).flat();
+            
+            if (allSubjectsKeys.includes(subjectKey)) {
+                backAction = 'showAllNotesList()';
+                backText = 'Back to All Subjects';
+            } else if (allPyqKeys.includes(subjectKey)) {
+                backAction = 'showAllPyqList()';
+                backText = 'Back to All PYQs';
+            }
+
+            hideAllViews();
+            
+            // Update the back button logic to use IDs reliably
+            const backButton = document.getElementById('detail-back-button');
+            const backTextElement = document.getElementById('detail-back-text'); 
+
+            if (backButton) {
+                backButton.setAttribute('onclick', backAction);
+            }
+            
+            if (backTextElement) { 
+                backTextElement.textContent = backText; 
+            }
+
+            // Populate the detail view
+            const notesTitle = document.getElementById('notes-title');
+            const notesContent = document.getElementById('notes-content');
+            const notesDetailView = document.getElementById('notes-detail-view');
+            
+            if (notesTitle) {
+                notesTitle.textContent = data.title;
+            }
+            
+            if (notesContent) {
+                notesContent.innerHTML = data.content; 
+            }
+            
+            if (notesDetailView) {
+                 notesDetailView.classList.remove('hidden');
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // --- Existing Functions (Untouched) ---
+
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            const menuIcon = document.getElementById('menu-icon');
+            if (!menu || !menuIcon) return;
+
+            isMenuOpen = !isMenuOpen;
+
+            if (isMenuOpen) {
+                menu.classList.remove('hidden');
+                menuIcon.setAttribute('d', 'M6 18L18 6M6 6l12 12');
+                document.body.style.overflow = 'hidden'; 
+            } else {
+                menu.classList.add('hidden');
+                menuIcon.setAttribute('d', 'M4 6h16M4 12h16M4 18h16');
+                document.body.style.overflow = ''; 
+            }
+        }
+        
+        function closeMobileMenu() {
+            if (isMenuOpen) {
+                 toggleMobileMenu();
+            }
+        }
+        
+        const NOTE_DETAIL_DATA = {
+            'political-science': {
+                title: 'Political Science: Foundation and Theory',
+                category: 'Optional Subject (PSIR)',
+                description: 'Detailed notes on political theory, thought, and governance.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Understanding Western Political Thought</h3><p>Dive deep into the works of Plato, Aristotle, Machiavelli, Hobbes, Locke, and Rousseau. Analyze their core philosophies on state, liberty, justice, and governance. Special emphasis is given to connecting classical theory with modern governance challenges in India.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Key Components of the Indian Constitution</h3><p>An exhaustive analysis of the Preamble, Fundamental Rights, Directive Principles of State Policy (DPSP), and Fundamental Duties. Detailed comparison of the Indian Constitutional structure with major global constitutions, highlighting key amendments and judicial interpretations.</p>`
+            },
+            'international-relations': {
+                title: 'International Relations: Global Politics and India\'s Role',
+                category: 'Optional Subject (PSIR)',
+                description: 'Comprehensive study of global politics, diplomacy, and IR theories.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Major Theories of IR</h3><p>Comprehensive coverage of Realism (Classical and Neo-Realism), Liberalism (Neo-Liberalism), Constructivism, and Critical Theories. Learn to apply these frameworks to current geopolitical events, such as conflicts, trade wars, and global institutional reforms.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">India's Foreign Policy and Diplomacy</h3><p>Study the evolution of India's foreign policy from Non-Alignment to modern strategic autonomy. Detailed examination of relations with major powers (US, Russia, China), regional neighbors (SAARC, BIMSTEC), and global organizations (UN, WTO).</p>`
+            },
+            // 'current-affairs' is handled by getSubjectNotesData()
+            'polity': { 
+                title: 'Polity: Indian Constitution and Governance',
+                category: 'General Studies (GS)',
+                description: 'The Indian Constitution, governance structure, and political system.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Constitutional Framework</h3><p>In-depth coverage of the making of the Constitution, its salient features, and the philosophy enshrined in the Preamble.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Union and State Government</h3><p>A structural and functional analysis of the Executive, Legislature, and Judiciary.</p>`
+            },
+            'ancient-history': { 
+                title: 'Ancient History: Pre-Vedic to Major Dynasties',
+                category: 'General Studies (GS)',
+                description: 'Pre-Vedic period, Harappan Civilization, and major ancient Indian dynasties.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Indus Valley Civilization and Vedic Period</h3><p>Detailed exploration of the Harappan sites, social structure, and economy.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Mauryan and Gupta Empires</h3><p>Focus on administrative systems, Ashoka's Dhamma, and the cultural achievements of the Gupta period.</p>`
+            },
+            'ethics': { 
+                title: 'Ethics: Integrity, Aptitude, and Case Studies (GS-IV)',
+                category: 'General Studies (GS)',
+                description: 'Case studies and theoretical frameworks for Ethics, Integrity, and Aptitude.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Ethical Theories and Human Values</h3><p>Study of various philosophical and moral thinkers and the role of family, society, and educational institutions in inculcating values.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Aptitude and Foundational Values for Civil Service</h3><p>Coverage of essential civil service qualities like integrity, impartiality, and compassion.</p>`
+            },
+            'indian-geography': {
+                title: 'Indian Geography: Physical and Human',
+                category: 'General Studies (GS)',
+                description: 'Physical features, climate, soil, and agricultural patterns of India.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Physical Geography of India</h3><p>In-depth study of India's physiographic divisions, river systems, climate, and natural vegetation.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Resources and Agriculture</h3><p>Detailed notes on soil types, mineral resources, energy sources, and major agricultural practices across different states.</p>`
+            },
+            'world-geography': {
+                title: 'World Geography: Geomorphology and Climatology',
+                category: 'General Studies (GS)',
+                description: 'Geomorphology, climatology, and global resource distribution.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Geomorphology and Tectonics</h3><p>Coverage of plate tectonics, seismic zones, volcanism, and landform development.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Oceanography and Economic Geography</h3><p>Study of ocean currents, tides, marine resources, and the distribution of natural resources worldwide.</p>`
+            },
+            'modern-history': {
+                title: 'Modern History: Independence Struggle and Post-Independence',
+                category: 'General Studies (GS)',
+                description: 'The struggle for independence and post-independence consolidation.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">The Rise of Nationalism</h3><p>Detailed examination of the revolt of 1857, the formation of the Indian National Congress, and the various phases of the national movement.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Post-Independence Consolidation</h3><p>Analysis of the challenges faced after 1947, including the integration of princely states and linguistic reorganization.</p>`
+            },
+            'economy': {
+                title: 'Economy: Macroeconomics and Indian Development',
+                category: 'General Studies (GS)',
+                description: 'Macroeconomics, budgetary policies, banking, and international trade.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Core Economic Concepts</h3><p>Understanding GDP, GNP, national income, inflation, fiscal policy, and monetary policy.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Planning and Reform</h3><p>Study of India's five-year plans, the LPG reforms of 1991, and current economic challenges.</p>`
+            },
+            'environment': {
+                title: 'Environment & Ecology: Biodiversity and Conservation',
+                category: 'General Studies (GS)',
+                description: 'Biodiversity, climate change, pollution, and conservation efforts.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Ecology and Ecosystems</h3><p>Concepts of ecology, biomes, biogeochemical cycles, and environmental degradation.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Climate Change and Pollution</h3><p>Coverage of global warming, greenhouse gases, and international conventions.</p>`
+            },
+            'pyq-psir': {
+                title: 'PSIR Optional PYQs (2013-2024)',
+                category: 'Previous Year Questions',
+                description: 'Topic-wise compiled mains questions for Political Science Optional Paper I & II.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Paper I: Political Theory and Indian Government</h3><p>Compilation includes questions on Western Political Thought, Indian Nationalism, and Indian Political System. Analyzed by sub-topic with marking scheme insights.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Paper II: International Relations and Comparative Politics</h3><p>Compilation focuses on IR theories, India's foreign policy, and comparative analysis of constitutions and political systems.</p>`
+            },
+            'pyq-gs-papers': {
+                title: 'General Studies - Combined Papers',
+                category: 'Previous Year Questions',
+                description: 'A comprehensive bundle of all GS Paper I, II, III, and IV mains questions.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Integrated GS Mains PYQ Booklet</h3><p>This resource provides all Mains questions from the last decade, allowing you to practice answer writing across subjects under timed conditions. Includes Essay topics.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Prelims PYQ 1995-2024</h3><p>Access to categorized Prelims PYQs for GS Paper I, with detailed explanations for correct and incorrect options.</p>`
+            },
+            'pyq-gs1': {
+                title: 'GS Paper I Mains PYQs (History, Geography, Society)',
+                category: 'Previous Year Questions',
+                description: 'Mains questions compiled for GS Paper I, categorized by syllabus topic.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">History & Culture Compilation</h3><p>All questions related to Modern Indian History, Art & Culture, and World History. Focus on trend analysis for high-yield topics.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Geography & Society Compilation</h3><p>PYQs covering Physical, Indian, and World Geography, along with questions on Indian Society and its contemporary issues.</p>`
+            },
+            'pyq-gs2': {
+                title: 'GS Paper II Mains PYQs (Polity, Governance, IR)',
+                category: 'Previous Year Questions',
+                description: 'Mains questions compiled for GS Paper II, categorized by syllabus topic.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Polity & Constitution</h3><p>PYQs focusing on the structure and functioning of the Judiciary, Parliament, and Executive, and fundamental rights issues.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Governance & International Relations</h3><p>Questions on transparency, accountability, welfare schemes, and India’s bilateral, regional, and global groupings.</p>`
+            },
+            'pyq-gs3': {
+                title: 'GS Paper III Mains PYQs (Economy, S&T, Security, Environment)',
+                category: 'Previous Year Questions',
+                description: 'Mains questions compiled for GS Paper III, categorized by syllabus topic.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Economy & Agriculture</h3><p>PYQs on budgeting, investment models, infrastructure, land reforms, and food security issues.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Internal Security & Disaster Management</h3><p>Questions on internal security challenges, border management, organized crime, and disaster response.</p>`
+            },
+            'pyq-gs4': {
+                title: 'GS Paper IV Mains PYQs (Ethics & Case Studies)',
+                category: 'Previous Year Questions',
+                description: 'Mains questions compiled for GS Paper IV, including all theoretical questions and case studies.',
+                content: `<h3 class="text-2xl font-bold text-primary-dark">Theoretical and Applied Ethics</h3><p>PYQs covering the definition of terms, contribution of moral thinkers, and emotional intelligence topics.</p><h3 class="text-2xl font-bold text-primary-dark mt-6">Case Studies</h3><p>A categorized set of case studies from previous years, helping students understand the required approach and ethical dilemmas involved.</p>`
+            }
+        };
+        
+        const SYLLABUS_DATA = {
+            'psir': {
+                title: 'PSIR Optional Syllabus (Paper I & II)',
+                subtitle: 'Political Science and International Relations',
+                content: `<h2 class="text-3xl font-extrabold text-accent-orange mb-4">Paper I: Political Theory and Indian Politics</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>Political Theory: Meaning and Approaches</li><li>Theories of State (Liberal, Marxist, Pluralist, Post-Colonial)</li><li>Indian Political Thought (Kautilya, Gandhi, Ambedkar)</li><li>Indian Government and Politics (Constitution, Parliament, Judiciary)</li></ul><h2 class="text-3xl font-extrabold text-accent-orange mt-8 mb-4">Paper II: International Relations and Comparative Politics</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>Comparative Politics: Approaches and themes</li><li>Key Theories of International Relations (Realism, Liberalism, Marxism, Feminist)</li><li>India’s Foreign Policy: Evolution and key determinants</li><li>India and the World: UNO, Global South, Regional organizations</li></ul><div class="mt-8 p-4 bg-cta-yellow/10 rounded-lg"><p class="font-semibold text-primary-dark">Note:</p><p class="text-sm">This is a summary. The full UPSC syllabus is extremely detailed; refer to the official notification for comprehensive, topic-by-topic listing.</p></div>`
+            },
+            'general-studies': {
+                title: 'General Studies Syllabus (Prelims & Mains)',
+                subtitle: 'GS Paper I, II, III, IV and Essay',
+                content: `<h2 class="text-3xl font-extrabold text-accent-orange mb-4">Prelims (Paper I & II)</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>GS I: History of India, Indian and World Geography, Indian Polity, Economy, Environment, Science & Tech, Current Events.</li><li>GS II (CSAT): Comprehension, Logical Reasoning, Decision Making, Basic Numeracy.</li></ul><h2 class="text-3xl font-extrabold text-accent-orange mt-8 mb-4">Mains (Paper I to V)</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>**GS I:** Indian Heritage and Culture, History and Geography of the World and Society.</li><li>**GS II:** Governance, Constitution, Polity, Social Justice and International Relations.</li><li>**GS III:** Technology, Economic Development, Biodiversity, Security and Disaster Management.</li><li>**GS IV:** Ethics, Integrity and Aptitude.</li></ul><div class="mt-8 p-4 bg-cta-yellow/10 rounded-lg"><p class="font-semibold text-primary-dark">Strategy Tip:</p><p class="text-sm">Integrate Prelims and Mains preparation as the syllabus overlaps significantly, especially in Polity, History, and Geography.</p></div>`
+            }
+        };
+
+        const BOOK_LIST_DATA = {
+            title: 'Essential Readings for UPSC CSE',
+            content: `
+                <div class="border-l-4 border-accent-orange pl-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">Indian Polity & Constitution (GS II)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Polity:** M. Laxmikanth (The fundamental resource)</li><li>**Constitution:** NCERT Class 11 - Indian Constitution at Work</li><li>**Governance:** Relevant ARC Reports (Selected Chapters)</li></ul></div>
+                <div class="border-l-4 border-accent-orange pl-4 pt-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">History (GS I)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Ancient/Medieval:** Old NCERTs (Class 11 & 12) or R.S. Sharma/Satish Chandra</li><li>**Modern India:** Spectrum (Rajiv Ahir) for facts and Bipan Chandra for analysis</li><li>**Art & Culture:** Nitin Singhania and NCERT Class 11 (An Introduction to Indian Art)</li></ul></div>
+                <div class="border-l-4 border-accent-orange pl-4 pt-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">Indian Economy (GS III)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Macroeconomics:** Class 12 NCERT</li><li>**Core Concepts:** Ramesh Singh or Sriram's IAS Material</li><li>**Current:** Economic Survey and Union Budget (Summary/Analysis)</li></ul></div>
+                <div class="border-l-4 border-accent-orange pl-4 pt-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">Geography (GS I)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Physical:** G.C. Leong (Certificate Physical and Human Geography)</li><li>**India/World:** NCERTs (Class 6 to 12)</li><li>**Atlas:** Oxford School Atlas or Orient BlackSwan Atlas</li></ul></div>
+            `
+        };
+
+        const ALL_SUBJECT_KEYS = {
+            'Optional Subject (PSIR)': ['political-science', 'international-relations'],
+            'General Studies (GS) - Papers I, II, III, IV': [
+                'current-affairs', 'polity', 'ancient-history', 'ethics', 
+                'indian-geography', 'world-geography', 'modern-history', 'economy', 'environment'
+            ]
+        };
+        
+        const ALL_PYQ_KEYS = {
+            'UPSC Mains (GS & Essay)': [
+                'pyq-gs1', 'pyq-gs2', 'pyq-gs3', 'pyq-gs4'
+            ],
+            'Optional & Prelims': [
+                'pyq-psir', 'pyq-gs-papers'
+            ]
+        };
+
+        function showAllNotesList() {
+            hideAllViews();
+            const container = document.getElementById('all-subjects-container');
+            if (!container) return; 
+            container.innerHTML = ''; 
+            let htmlContent = '';
+            for (const category in ALL_SUBJECT_KEYS) {
+                if (ALL_SUBJECT_KEYS.hasOwnProperty(category)) {
+                    htmlContent += `<h2 class="text-3xl font-bold text-accent-orange mb-4 pt-4 border-b border-gray-300">${category}</h2>`;
+                    htmlContent += '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+                    ALL_SUBJECT_KEYS[category].forEach(key => {
+                        const subject = NOTE_DETAIL_DATA[key] || getSubjectNotesData(key); // Use the lookup function
+                        if (subject) {
+                            htmlContent += `
+                                <div onclick="showSubjectNotes('${key}')" class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-200 cursor-pointer border-l-4 border-cta-yellow/50 hover:bg-light-bg">
+                                    <h3 class="text-xl font-bold text-primary-dark mb-1">${subject.title}</h3>
+                                    <p class="text-gray-600 text-sm">${subject.description}</p>
+                                </div>
+                            `;
+                        }
+                    });
+                    htmlContent += '</div>';
+                }
+            }
+            container.innerHTML = htmlContent;
+            document.getElementById('all-notes-list-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showAllPyqList() {
+            hideAllViews();
+            const container = document.getElementById('all-pyqs-container');
+            if (!container) return; 
+            container.innerHTML = ''; 
+            let htmlContent = '';
+            for (const category in ALL_PYQ_KEYS) {
+                if (ALL_PYQ_KEYS.hasOwnProperty(category)) {
+                    htmlContent += `<h2 class="text-3xl font-bold text-accent-orange mb-4 pt-4 border-b border-gray-300">${category}</h2>`;
+                    htmlContent += '<div class="grid grid-cols-1 md:grid-cols-2 gap-6">';
+                    ALL_PYQ_KEYS[category].forEach(key => {
+                        const pyq = NOTE_DETAIL_DATA[key];
+                        if (pyq) {
+                            htmlContent += `
+                                <div onclick="showSubjectNotes('${key}')" class="p-5 bg-white rounded-xl shadow-lg hover:shadow-xl transition duration-200 cursor-pointer border-l-4 border-cta-yellow/50 hover:bg-light-bg">
+                                    <h3 class="text-xl font-bold text-primary-dark mb-1">${pyq.title}</h3>
+                                    <p class="text-gray-600 text-sm">${pyq.description}</p>
+                                </div>
+                            `;
+                        }
+                    });
+                    htmlContent += '</div>';
+                }
+            }
+            container.innerHTML = htmlContent;
+            document.getElementById('pyq-list-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showSyllabusView(type) {
+            const data = SYLLABUS_DATA[type];
+            if (!data) return;
+            hideAllViews();
+            const syllabusTitle = document.getElementById('syllabus-title');
+            const syllabusSubtitle = document.getElementById('syllabus-subtitle');
+            const syllabusContent = document.getElementById('syllabus-content');
+            if (syllabusTitle) syllabusTitle.textContent = data.title;
+            if (syllabusSubtitle) syllabusSubtitle.textContent = data.subtitle;
+            if (syllabusContent) syllabusContent.innerHTML = data.content;
+            document.getElementById('syllabus-view').classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showBookListView() {
+            const data = BOOK_LIST_DATA;
+            hideAllViews();
+            const bookListView = document.getElementById('book-list-view');
+            if (bookListView) {
+                const titleElement = bookListView.querySelector('h1');
+                const contentElement = document.getElementById('book-list-content');
+                if (titleElement) titleElement.textContent = data.title;
+                if (contentElement) contentElement.innerHTML = data.content;
+                bookListView.classList.remove('hidden');
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+    </script>
+
+</body>
+</html>
