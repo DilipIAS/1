@@ -126,7 +126,31 @@
                 
                 <a href="#" onclick="showBookListView(); return false;" class="text-gray-600 hover:text-accent-orange transition duration-200">Book List</a>
                 
-                <a href="#" class="text-gray-600 hover:text-accent-orange transition duration-200">FAQ</a>
+                <div class="relative group">
+                    <div class="text-gray-600 hover:text-accent-orange transition duration-200 flex items-center cursor-default">
+                        Contact
+                        <svg class="w-4 h-4 ml-1 transform group-hover:rotate-180 transition duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                    </div>
+                    <div class="absolute top-full right-0 w-64 bg-white rounded-lg shadow-xl py-2 opacity-0 invisible group-hover:opacity-100 group-hover:visible transition duration-300 z-50 border border-gray-100">
+                        <a href="tel:+918169718564" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-light-bg hover:text-primary-dark transition duration-150 rounded-md mx-2 font-medium">
+                            <svg class="w-5 h-5 mr-2 text-accent-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
+                            +91 81697 18564
+                        </a>
+                        <a href="mailto:info@dilipias.com" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-light-bg hover:text-primary-dark transition duration-150 rounded-md mx-2 font-medium">
+                            <svg class="w-5 h-5 mr-2 text-accent-orange" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8m-2 4v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path></svg>
+                            info@dilipias.com
+                        </a>
+                        <div class="border-t border-gray-100 my-1 mx-2"></div>
+                        <a href="https://t.me/CSEwithDilipda" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-light-bg hover:text-primary-dark transition duration-150 rounded-md mx-2 font-medium">
+                            <svg class="w-5 h-5 mr-2 text-blue-500" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm4.43 8.35L9.67 13.9c-.31.25-.76.1-.9-.23l-.93-3.13c-.09-.31.11-.64.44-.73l7.46-2.19c.34-.1.68.14.63.48zm-6.24 4.54l-.44 2.1c-.13.34-.54.43-.79.16l-1.3-1.25c-.2-.19-.19-.51.02-.69l6.32-5.71c.21-.19.55-.05.58.24l.02.04c.02.28-.16.55-.44.62l-4.57 1.13c-.15.04-.3.06-.45.06z"/></svg>
+                            Join Telegram Channel
+                        </a>
+                        <a href="https://www.youtube.com/@dilip_ias_official" target="_blank" class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-light-bg hover:text-primary-dark transition duration-150 rounded-md mx-2 font-medium">
+                            <svg class="w-5 h-5 mr-2 text-red-600" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M21.54 6.49a2.38 2.38 0 00-1.66-1.66C18.15 4 12 4 12 4s-6.15 0-7.88.83a2.38 2.38 0 00-1.66 1.66C2 8.15 2 12 2 12s0 3.85.83 5.51a2.38 2.38 0 001.66 1.66C5.85 20 12 20 12 20s6.15 0 7.88-.83a2.38 2.38 0 001.66-1.66C22 15.85 22 12 22 12s0-3.85-.83-5.51zM10 15V9l6 3-6 3z"/></svg>
+                            YouTube Channel
+                        </a>
+                    </div>
+                </div>
                 
                 <!-- Admin/Logout Button (Dynamic) -->
                 <button id="admin-logout-button-desktop" 
@@ -151,7 +175,8 @@
                 <a href="#" onclick="showSyllabusView('psir'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">PSIR Optional Syllabus</a>
                 <a href="#" onclick="showSyllabusView('general-studies'); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">General Studies Syllabus</a>
                 <a href="#" onclick="showBookListView(); closeMobileMenu(); return false;" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">Book List</a>
-                <a href="#" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">FAQ</a>
+                <button onclick="showMobileContactAlert(); closeMobileMenu();" class="w-full text-left block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:bg-subtle-gray hover:text-primary-dark transition duration-150">Contact</button>
+                
                 <!-- Admin/Logout Button (Dynamic) -->
                 <button id="admin-logout-button-mobile" 
                     class="w-full mt-2 px-5 py-2 bg-accent-orange text-white text-base font-semibold rounded-lg shadow-lg hover:bg-opacity-90 transition duration-300 ease-in-out" 
@@ -183,7 +208,7 @@
                             Master the UPSC Civil Services Examination with expert guidance, personalized strategies, and a proven track record of success.
                         </p>
                         <div class="flex flex-col sm:flex-row justify-center md:justify-start space-y-4 sm:space-y-0 sm:space-x-4">
-                            <a href="#register" class="inline-block bg-cta-yellow text-primary-dark font-extrabold text-xl py-4 px-10 rounded-full shadow-2xl transition duration-300 transform hover:scale-105 hover:bg-accent-orange">
+                            <a href="#" onclick="openEnrollmentForm(); return false;" class="inline-block bg-cta-yellow text-primary-dark font-extrabold text-xl py-4 px-10 rounded-full shadow-2xl transition duration-300 transform hover:scale-105 hover:bg-accent-orange" id="register">
                                 Enroll Today
                             </a>
                         </div>
@@ -550,15 +575,8 @@
                 
                 <!-- Column 1: Logo & Social -->
                 <div>
-                    <h3 class="text-2xl font-extrabold text-white mb-4 tracking-tight">Dilip IAS</h3>
+                    <h3 class="text-2xl font-extrabold text-accent-orange mb-4 tracking-tight">Dilip IAS</h3>
                     <p class="text-sm mb-6 text-gray-400">Your single source for Civil Services success.</p>
-                    <div class="flex space-x-4 text-xl">
-                        <!-- Placeholder for social icons (using simple letters as stand-ins for icons) -->
-                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="Facebook">F</a>
-                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="Twitter">T</a>
-                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="Instagram">I</a>
-                        <a href="#" class="hover:text-accent-orange transition duration-150" aria-label="YouTube">Y</a>
-                    </div>
                 </div>
 
                 <!-- Column 2: Pages -->
@@ -1133,23 +1151,322 @@
             'psir': {
                 title: 'PSIR Optional Syllabus (Paper I & II)',
                 subtitle: 'Political Science and International Relations',
-                content: `<h2 class="text-3xl font-extrabold text-accent-orange mb-4">Paper I: Political Theory and Indian Politics</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>Political Theory: Meaning and Approaches</li><li>Theories of State (Liberal, Marxist, Pluralist, Post-Colonial)</li><li>Indian Political Thought (Kautilya, Gandhi, Ambedkar)</li><li>Indian Government and Politics (Constitution, Parliament, Judiciary)</li></ul><h2 class="text-3xl font-extrabold text-accent-orange mt-8 mb-4">Paper II: International Relations and Comparative Politics</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>Comparative Politics: Approaches and themes</li><li>Key Theories of International Relations (Realism, Liberalism, Marxism, Feminist)</li><li>India’s Foreign Policy: Evolution and key determinants</li><li>India and the World: UNO, Global South, Regional organizations</li></ul><div class="mt-8 p-4 bg-cta-yellow/10 rounded-lg"><p class="font-semibold text-primary-dark">Note:</p><p class="text-sm">This is a summary. The full UPSC syllabus is extremely detailed; refer to the official notification for comprehensive, topic-by-topic listing.</p></div>`
+                //content: `<h2 class="text-3xl font-extrabold text-accent-orange mb-4">Paper I: Political Theory and Indian Politics</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>Political Theory: Meaning and Approaches</li><li>Theories of State (Liberal, Marxist, Pluralist, Post-Colonial)</li><li>Indian Political Thought (Kautilya, Gandhi, Ambedkar)</li><li>Indian Government and Politics (Constitution, Parliament, Judiciary)</li></ul><h2 class="text-3xl font-extrabold text-accent-orange mt-8 mb-4">Paper II: International Relations and Comparative Politics</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>Comparative Politics: Approaches and themes</li><li>Key Theories of International Relations (Realism, Liberalism, Marxism, Feminist)</li><li>India’s Foreign Policy: Evolution and key determinants</li><li>India and the World: UNO, Global South, Regional organizations</li></ul><div class="mt-8 p-4 bg-cta-yellow/10 rounded-lg"><p class="font-semibold text-primary-dark">Note:</p><p class="text-sm">This is a summary. The full UPSC syllabus is extremely detailed; refer to the official notification for comprehensive, topic-by-topic listing.</p></div>`
+                content: `     <h2 class="text-2xl font-extrabold text-accent-orange mt-4 mb-4 border-b-2 border-accent-orange pb-2">Paper I: Political Theory and Indian Politics</h2>
+                    
+                    <div class="bg-light-bg p-4 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">Section A: Political Theory</h3>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1">
+                            <li>Political Theory: meaning and approaches.</li>
+                            <li>Theories of state: Liberal, Neo-liberal, Marxist, Pluralist, Post-colonial, and Feminist.</li>
+                            <li>Justice: Conceptions of justice with special reference to Rawl’s theory of justice and its communitarian critiques.</li>
+                            <li>Equality: Social, political, and economic; the relationship between equality and freedom; Affirmative action.</li>
+                            <li>Rights: Meaning and theories; different kinds of rights; Concept of Human Rights.</li>
+                            <li>Democracy: Classical and contemporary theories; different models of democracy—representative, participatory and deliberative.</li>
+                            <li>Concept of power: hegemony, ideology, and legitimacy.</li>
+                            <li>Political Ideologies: Liberalism, Socialism, Marxism, Fascism, Gandhism, and Feminism.</li>
+                            <li>Indian Political Thought: Dharmashastra, Arthashastra, and Buddhist Traditions; Sir Syed Ahmed Khan, Sri Aurobindo, M. K. Gandhi, B. R. Ambedkar, M. N. Roy.</li>
+                            <li>Western Political Thought: Plato, Aristotle, Machiavelli, Hobbes, Locke, John S. Mill, Marx, Gramsci, Hannah Arendt.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-light-bg p-4 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">Section B: Indian Government and Politics</h3>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1">
+                            <li>Political Strategies of India’s Freedom Struggle: Constitutionalism to mass Satyagraha, Noncooperation, Civil Disobedience; Militant and Revolutionary Movements, Peasant and Workers Movements.</li>
+                            <li>Perspectives on Indian National Movement; Liberal, Socialist, and Marxist; Radical Humanist and Dalit.</li>
+                            <li>Making of the Indian Constitution: Legacies of the British rule; different social and political perspectives.</li>
+                            <li>Salient Features of the Indian Constitution: The Preamble, Fundamental Rights and Duties, Directive Principles; Parliamentary System and Amendment Procedures; Judicial Review and Basic Structure doctrine.</li>
+                            <li>Principal Organs of the Union Government: Envisaged role and actual working of the Executive, Legislature, and Supreme Court.</li>
+                            <li>Principal Organs of the State Government: Envisaged role and actual working of the Executive, Legislature, and High Courts.</li>
+                            <li>Grassroots Democracy: Panchayati Raj and Municipal Government; Significance of 73rd and 74th Amendments; Grassroot movements.</li>
+                            <li>Statutory Institutions/Commissions: Election Commission, Comptroller and Auditor General, Finance Commission, Union Public Service Commission, National Commission for Scheduled Castes, National Commission for Scheduled Tribes, National Commission for Women; National Human Rights Commission, National Commission for Minorities, National Backward Classes Commission.</li>
+                            <li>Federalism: Constitutional provisions; changing nature of center-state relations; integrationist tendencies and regional aspirations; inter-state disputes.</li>
+                            <li>Planning and Economic Development: Nehruvian and Gandhian perspectives; Role of planning and public sector; Green Revolution, land reforms and agrarian relations; liberalization and economic reforms.</li>
+                            <li>Caste, Religion, and Ethnicity in Indian Politics.</li>
+                            <li>Party System: National and regional political parties, ideological and social bases of parties; Patterns of coalition politics; Pressure groups, trends in electoral behavior; changing socio-economic profile of Legislators.</li>
+                            <li>Social Movement: Civil liberties and human rights movements; women’s movements; environmentalist movements.</li>
+                        </ul>
+                    </div>
+
+
+                    <h2 class="text-2xl font-extrabold text-accent-orange mt-8 mb-4 border-b-2 border-accent-orange pb-2">Paper II: Comparative Politics and International Relations</h2>
+
+                    <div class="bg-light-bg p-4 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">Section A: Comparative Political Analysis and International Politics</h3>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1">
+                            <li>Comparative Politics: Nature and major approaches; Political economy and political sociology perspectives; Limitations of the comparative method.</li>
+                            <li>State in Comparative Perspective: Characteristics and changing nature of the State in capitalist and socialist economies, and advanced industrial and developing societies.</li>
+                            <li>Politics of Representation and Participation: Political parties, pressure groups and social movements in advanced industrial and developing societies.</li>
+                            <li>Globalisation: Responses from developed and developing societies.</li>
+                            <li>Approaches to the Study of International Relations: Idealist, Realist, Marxist, Functionalist and Systems theory.</li>
+                            <li>Key Concepts in International Relations: National interest, security and power; Balance of power and deterrence; Transational actors and collective security; World capitalist economy and globalisation.</li>
+                            <li>Changing International Political Order:
+                                <ul class="list-circle list-inside ml-6">
+                                    <li>Rise of superpowers; Strategic and ideological Bipolarity, arms race and cold war; Nuclear threat;</li>
+                                    <li>Non-aligned movement: Aims and achievements.</li>
+                                    <li>Collapse of the Soviet Union; Unipolarity and American hegemony; Relevance of non-alignment in the contemporary world.</li>
+                                </ul>
+                            </li>
+                            <li>Evolution of the International Economic System: From Bretton woods to WTO; Socialist economies and the CMEA (Council for Mutual Economic Assistance); Third World demand for new international economic order; Globalisation of the world economy.</li>
+                            <li>United Nations: Envisaged role and actual record; Specialized UN agencies—aims and functioning; the need for UN reforms.</li>
+                            <li>Regionalisation of World Politics: EU, ASEAN, APEC, SAARC, NAFTA.</li>
+                            <li>Contemporary Global Concerns: Democracy, human rights, environment, gender justice terrorism, nuclear proliferation.</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="bg-light-bg p-4 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">Section B: India and the World</h3>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1">
+                            <li>Indian Foreign Policy: Determinants of foreign policy; the institutions of policy-making; continuity and change.</li>
+                            <li>India’s Contribution to the Non-Alignment Movement Different phases; current role.</li>
+                            <li>India and South Asia:
+                                <ul class="list-circle list-inside ml-6">
+                                    <li>Regional Co-operation: SAARC-past performance and future prospects.</li>
+                                    <li>South Asia as a Free Trade Area.</li>
+                                    <li>India’s “Look East” policy.</li>
+                                    <li>Impediments to regional co-operation: River water disputes; illegal cross-border migration; Ethnic conflicts and insurgencies; Border disputes.</li>
+                                </ul>
+                            </li>
+                            <li>India and the Global South: Relations with Africa and Latin America; Leadership role in the demand for NIEO and WTO negotiations.</li>
+                            <li>India and the Global Centres of Power: USA, EU, Japan, China and Russia.</li>
+                            <li>India and the UN System: Role in UN Peace-keeping; Demand for Permanent Seat in the Security Council.</li>
+                            <li>India and the Nuclear Question: Changing perceptions and policy.</li>
+                            <li>Recent developments in Indian Foreign Policy: India’s position on the recent crises in Afghanistan, Iraq, and West Asia, growing relations with US and Israel; Vision of a new world order.</li>
+                        </ul>
+                    </div>
+                `
             },
             'general-studies': {
                 title: 'General Studies Syllabus (Prelims & Mains)',
                 subtitle: 'GS Paper I, II, III, IV and Essay',
-                content: `<h2 class="text-3xl font-extrabold text-accent-orange mb-4">Prelims (Paper I & II)</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>GS I: History of India, Indian and World Geography, Indian Polity, Economy, Environment, Science & Tech, Current Events.</li><li>GS II (CSAT): Comprehension, Logical Reasoning, Decision Making, Basic Numeracy.</li></ul><h2 class="text-3xl font-extrabold text-accent-orange mt-8 mb-4">Mains (Paper I to V)</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>**GS I:** Indian Heritage and Culture, History and Geography of the World and Society.</li><li>**GS II:** Governance, Constitution, Polity, Social Justice and International Relations.</li><li>**GS III:** Technology, Economic Development, Biodiversity, Security and Disaster Management.</li><li>**GS IV:** Ethics, Integrity and Aptitude.</li></ul><div class="mt-8 p-4 bg-cta-yellow/10 rounded-lg"><p class="font-semibold text-primary-dark">Strategy Tip:</p><p class="text-sm">Integrate Prelims and Mains preparation as the syllabus overlaps significantly, especially in Polity, History, and Geography.</p></div>`
-            }
+                // content: `<h2 class="text-3xl font-extrabold text-accent-orange mb-4">Prelims (Paper I & II)</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>GS I: History of India, Indian and World Geography, Indian Polity, Economy, Environment, Science & Tech, Current Events.</li><li>GS II (CSAT): Comprehension, Logical Reasoning, Decision Making, Basic Numeracy.</li></ul><h2 class="text-3xl font-extrabold text-accent-orange mt-8 mb-4">Mains (Paper I to V)</h2><ul class="list-disc list-inside space-y-2 ml-4"><li>**GS I:** Indian Heritage and Culture, History and Geography of the World and Society.</li><li>**GS II:** Governance, Constitution, Polity, Social Justice and International Relations.</li><li>**GS III:** Technology, Economic Development, Biodiversity, Security and Disaster Management.</li><li>**GS IV:** Ethics, Integrity and Aptitude.</li></ul><div class="mt-8 p-4 bg-cta-yellow/10 rounded-lg"><p class="font-semibold text-primary-dark">Strategy Tip:</p><p class="text-sm">Integrate Prelims and Mains preparation as the syllabus overlaps significantly, especially in Polity, History, and Geography.</p></div>`
+                content: ` <h2 class="text-2xl font-extrabold text-accent-orange mt-4 mb-4 border-b-2 border-accent-orange pb-2">I. Preliminary Examination Syllabus</h2>
+                    
+                    <div class="bg-light-bg p-4 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">General Studies Paper I - (200 marks)</h3>
+                        <p class="text-sm text-gray-600 mb-2">Duration: Two hours</p>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1">
+                            <li>Current events of national and international importance</li>
+                            <li>History of India and Indian National Movement</li>
+                            <li>Indian and World Geography - Physical, Social, Economic geography of India and the World.</li>
+                            <li>Indian Polity and Governance - Constitution, Political System, Panchayati Raj, Public Policy, Rights Issues</li>
+                            <li>Economic and Social Development - Sustainable Development, Poverty, Inclusion, Demographics, Social Sector Initiatives, etc.</li>
+                            <li>General issues on Environmental Ecology, Biodiversity, and Climate Change - that do not require subject specialisation</li>
+                            <li>General Science</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-light-bg p-4 rounded-lg border border-gray-200 mb-6">
+                        <h3 class="text-xl font-bold text-primary-dark mb-2">General Studies Paper II - (200 marks) (CSAT)</h3>
+                        <p class="text-sm text-gray-600 mb-2">Duration: Two hours</p>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1">
+                            <li>Comprehension</li>
+                            <li>Interpersonal skills including communication skills;</li>
+                            <li>Logical reasoning and analytical ability</li>
+                            <li>Decision-making and problem-solving</li>
+                            <li>General mental ability</li>
+                            <li>Basic numeracy (numbers and their relations, orders of magnitude, etc.) (Class X level)</li>
+                            <li>Data interpretation (charts, graphs, tables, data sufficiency, etc. - Class X level)</li>
+                        </ul>
+                        <p class="text-xs mt-3 text-red-600 font-semibold">Note: Paper II will be a qualifying paper with minimum qualifying marks fixed at 33%. Both papers are mandatory.</p>
+                    </div>
+
+                    <h2 class="text-2xl font-extrabold text-accent-orange mt-8 mb-4 border-b-2 border-accent-orange pb-2">II. Main Examination Syllabus</h2>
+                    
+                    <div class="bg-subtle-gray p-4 rounded-lg border border-gray-300 mb-6">
+                        <h2 class="text-xl font-bold text-primary-dark mb-2">Qualifying Papers on Indian Languages and English</h2>
+                        <p class="text-sm text-gray-700 mb-2">The aim is to test reading comprehension and clear expression.</p>
+                        <ul class="list-disc list-inside ml-4 text-sm text-gray-700 space-y-1">
+                            <li>Two qualifying language papers - English Mandatory and any other language from the list of 22 languages you can choose </li>
+                            <li>Comprehension of given passages, Precis Writing, Usage and Vocabulary, Short Essays.</li>
+                            <li>For Indian Languages: Translation from English to the Indian Language and vice-versa.</li>
+                        </ul>
+                        <p class="text-xs mt-3 text-red-600 font-semibold">Note: These papers are of qualifying nature only and marks will not be counted for ranking.</p>
+                    </div>
+
+                    <h2 class="text-xl font-bold text-primary-dark mt-8 mb-2 border-b border-accent-orange/50 pb-1">Paper I: Essay</h2>
+                    <p class="text-sm text-gray-700">Candidates may be required to write essays on multiple topics. They are expected to stay closely aligned with the subject, arrange ideas orderly, and write concisely. Credit will be given for effective and precise expression.</p>
+
+                    <h2 class="text-xl font-bold text-primary-dark mt-8 mb-2 border-b border-accent-orange/50 pb-1">Paper II: General Studies I</h2>
+                    <p class="text-base font-semibold text-primary-dark">Indian Heritage and Culture, History, and Geography of the World and Society</p>
+                    <ul class="list-disc list-inside ml-6 text-sm text-gray-700 space-y-1">
+                        <li>Indian culture will cover the salient aspects of Art Forms, literature, and Architecture from ancient to modern times.</li>
+                        <li>Modern Indian history from about the middle of the eighteenth century until the present—significant events, personalities, and issues.</li>
+                        <li>The Freedom Struggle—its various stages and important contributors/contributions from different parts of the country.</li>
+                        <li>Post-independence consolidation and reorganization within the country.</li>
+                        <li>World history including events from the 18th century such as the industrial revolution, world wars, redrawal of national boundaries, colonization, decolonization, political philosophies like communism, capitalism, socialism, etc., and their effects on society.</li>
+                        <li>Salient features of Indian Society, Diversity of India.</li>
+                        <li>Role of women and women’s organizations, population and associated issues, poverty and developmental issues, urbanization, their problems, and their remedies.</li>
+                        <li>Effects of globalization on Indian society.</li>
+                        <li>Social empowerment, communalism, regionalism, and secularism.</li>
+                        <li>Salient features of the world’s physical geography.</li>
+                        <li>Distribution of key natural resources across the world (including South Asia and the Indian sub-continent); factors responsible for the location of primary, secondary, and tertiary sector industries in various parts of the world (including India).</li>
+                        <li>Important Geophysical phenomena such as earthquakes, tsunamis, volcanic activity, cyclones, etc.; geographical features and their location—changes in critical geographical features (including water bodies and ice caps) and in flora and fauna and the effects of such changes.</li>
+                    </ul>
+
+                    <h2 class="text-xl font-bold text-primary-dark mt-8 mb-2 border-b border-accent-orange/50 pb-1">Paper III: General Studies II</h2>
+                    <p class="text-base font-semibold text-primary-dark">Governance, Constitution, Polity, Social Justice, and International Relations</p>
+                    <ul class="list-disc list-inside ml-6 text-sm text-gray-700 space-y-1">
+                        <li>Indian Constitution—historical underpinnings, evolution, features, amendments, significant provisions, and basic structure.</li>
+                        <li>Functions and responsibilities of the Union and the States; issues and challenges pertaining to the federal structure, devolution of powers and finances up to local levels, and challenges therein.</li>
+                        <li>Separation of powers between various organs, dispute redressal mechanisms, and institutions.</li>
+                        <li>Comparison of the Indian constitutional scheme with that of other countries.</li>
+                        <li>Parliament and State legislatures—structure, functioning, conduct of business, powers, privileges, and issues arising out of these.</li>
+                        <li>Structure, organization, and functioning of the Executive and the Judiciary—Ministries and Departments of the Government; pressure groups and formal/informal associations and their role in the polity.</li>
+                        <li>Salient features of the Representation of People’s Act.</li>
+                        <li>Appointment to various Constitutional posts, powers, functions, and responsibilities of various Constitutional Bodies.</li>
+                        <li>Statutory, regulatory, and various quasi-judicial bodies.</li>
+                        <li>Government policies and interventions for development in various sectors and issues arising out of their design and implementation.</li>
+                        <li>Development processes and the development industry—the role of NGOs, SHGs, various groups and associations, donors, charities, institutional and other stakeholders.</li>
+                        <li>Welfare schemes for vulnerable sections of the population by the Centre and States and the performance of these schemes; mechanisms, laws, institutions, and Bodies constituted for the protection and betterment of these vulnerable sections.</li>
+                        <li>Issues relating to the development and management of Social Sector/Services relating to Health, Education, and Human Resources.</li>
+                        <li>Issues relating to poverty and hunger.</li>
+                        <li>Important aspects of governance, transparency, and accountability, e-governance—applications, models, successes, limitations, and potential; citizens charters, transparency, and accountability and institutional and other measures.</li>
+                        <li>Role of civil services in a democracy.</li>
+                        <li>India and its neighborhood relations.</li>
+                        <li>Bilateral, regional, and global groupings and agreements involving India and/or affecting India’s interests.</li>
+                        <li>Effect of policies and politics of developed and developing countries on India’s interests, Indian diaspora.</li>
+                        <li>Important International institutions, agencies, and fora—their structure and mandate.</li>
+                    </ul>
+
+                    <h2 class="text-xl font-bold text-primary-dark mt-8 mb-2 border-b border-accent-orange/50 pb-1">Paper IV: General Studies III</h2>
+                    <p class="text-base font-semibold text-primary-dark">Technology, Economic Development, Biodiversity, Environment, Security, and Disaster Management</p>
+                    <ul class="list-disc list-inside ml-6 text-sm text-gray-700 space-y-1">
+                        <li>Indian Economy and issues relating to planning, mobilization of resources, growth, development, and employment.</li>
+                        <li>Inclusive growth and issues arising from it.</li>
+                        <li>Government Budgeting.</li>
+                        <li>Major crops—cropping patterns in various parts of the country, different types of irrigation and irrigation systems, storage, transport, and marketing of agricultural produce, and issues and related constraints; e-technology in the aid of farmers.</li>
+                        <li>Issues related to direct and indirect farm subsidies and minimum support prices; Public Distribution System—objectives, functioning, limitations, revamping; issues of buffer stocks and food security; Technology missions; economics of animal-rearing.</li>
+                        <li>Food processing and related industries in India—scope and significance, location, upstream and downstream requirements, supply chain management.</li>
+                        <li>Land reforms in India.</li>
+                        <li>Effects of liberalization on the economy, changes in industrial policy and their effects on industrial growth.</li>
+                        <li>Infrastructure: Energy, Ports, Roads, Airports, Railways, etc.</li>
+                        <li>Investment models.</li>
+                        <li>Science and Technology—developments and their applications and effects in everyday life.</li>
+                        <li>Achievements of Indians in science and technology; indigenization of technology and developing new technology.</li>
+                        <li>Awareness in the fields of IT, Space, Computers, robotics, nano-technology, bio-technology, and issues relating to intellectual property rights.</li>
+                        <li>Conservation, environmental pollution and degradation, environmental impact assessment.</li>
+                        <li>Disaster and disaster management.</li>
+                        <li>Linkages between development and spread of extremism.</li>
+                        <li>Role of external state and non-state actors in creating challenges to internal security.</li>
+                        <li>Challenges to internal security through communication networks, role of media and social networking sites in internal security challenges, basics of cyber security; money-laundering and its prevention.</li>
+                        <li>Security challenges and their management in border areas; linkages of organized crime with terrorism.</li>
+                        <li>Various Security forces and agencies and their mandate.</li>
+                    </ul>
+
+                    <h2 class="text-xl font-bold text-primary-dark mt-8 mb-2 border-b border-accent-orange/50 pb-1">Paper V: General Studies IV</h2>
+                    <p class="text-base font-semibold text-primary-dark">Ethics, Integrity, and Aptitude</p>
+                    <ul class="list-disc list-inside ml-6 text-sm text-gray-700 space-y-1">
+                        <li>Ethics and Human Interface: Essence, determinants, and consequences of ethics in human actions; dimensions of ethics; ethics in private and public relationships. Human Values—lessons from the lives and teachings of great leaders, reformers, and administrators; role of family, society, and educational institutions in inculcating values.</li>
+                        <li>Attitude: Content, structure, function; its influence and relation with thought and behavior; moral and political attitudes; social influence and persuasion.</li>
+                        <li>Aptitude and Foundational Values for Civil Service: Integrity, impartiality, non-partisanship, objectivity, dedication to public service, empathy, tolerance, and compassion towards weaker sections.</li>
+                        <li>Emotional Intelligence: Concepts and their utilities and application in administration and governance.</li>
+                        <li>Contributions of Moral Thinkers and Philosophers from India and World.</li>
+                        <li>Public/Civil Service Values and Ethics in Public Administration: Status and problems; ethical concerns and dilemmas in government and private institutions; laws, rules, regulations, and conscience as sources of ethical guidance; accountability and ethical governance; strengthening of ethical and moral values in governance; ethical issues in international relations and funding; corporate governance.</li>
+                        <li>Probity in Governance: Concept of public service; Philosophical basis of governance and probity; Information sharing and transparency in government, Right to Information, Codes of Ethics, Codes of Conduct, Citizen’s Charters, Work culture, Quality of service delivery, Utilization of public funds, challenges of corruption.</li>
+                        <li>Case Studies on the Above Issues (Used to test the candidates’ attitude, approach, and problem-solving approach).</li>
+                    </ul>
+                `
+                }        
         };
 
         const BOOK_LIST_DATA = {
             title: 'Essential Readings for UPSC CSE',
             content: `
-                <div class="border-l-4 border-accent-orange pl-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">Indian Polity & Constitution (GS II)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Polity:** M. Laxmikanth (The fundamental resource)</li><li>**Constitution:** NCERT Class 11 - Indian Constitution at Work</li><li>**Governance:** Relevant ARC Reports (Selected Chapters)</li></ul></div>
-                <div class="border-l-4 border-accent-orange pl-4 pt-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">History (GS I)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Ancient/Medieval:** Old NCERTs (Class 11 & 12) or R.S. Sharma/Satish Chandra</li><li>**Modern India:** Spectrum (Rajiv Ahir) for facts and Bipan Chandra for analysis</li><li>**Art & Culture:** Nitin Singhania and NCERT Class 11 (An Introduction to Indian Art)</li></ul></div>
-                <div class="border-l-4 border-accent-orange pl-4 pt-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">Indian Economy (GS III)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Macroeconomics:** Class 12 NCERT</li><li>**Core Concepts:** Ramesh Singh or Sriram's IAS Material</li><li>**Current:** Economic Survey and Union Budget (Summary/Analysis)</li></ul></div>
-                <div class="border-l-4 border-accent-orange pl-4 pt-4"><h3 class="text-2xl font-bold text-primary-dark mb-2">Geography (GS I)</h3><ul class="list-disc list-inside ml-4 space-y-1"><li>**Physical:** G.C. Leong (Certificate Physical and Human Geography)</li><li>**India/World:** NCERTs (Class 6 to 12)</li><li>**Atlas:** Oxford School Atlas or Orient BlackSwan Atlas</li></ul></div>
-            `
+                <div class="p-6 bg-light-bg rounded-xl shadow-lg border-t-4 border-accent-orange">    
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">History:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li>NCERT Class 6-12 (The Foundation)</li>
+                                    <li>Ancient History: <b>India’s Ancient Past</b> by RS Sharma.</li>
+                                    <li>Medieval History: <b>History of Medieval India</b> by Satish Chandra.</li>
+                                    <li>Modern History: <b>History of Modern India</b> by Bipan Chandra and **Modern Indian History** by Vision IAS.</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Geography:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li>NCERT Class 6-12</li>
+                                    <li><b>Certificate Physical and Human Geography</b> by GC Leong.</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Polity:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li><b>Indian Polity</b> by M. Laxmikant.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Economy:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li>NCERT Class 11 Indian Economic Development</li>
+                                    <li>NCERT Class 12 Introduction to Macroeconomics</li>
+                                    <li><b>Indian Economy</b> by Ramesh Singh.</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Environment and Ecology:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li><b>Environment</b> by DR Khullar.</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Science and Technology:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li>NCERT Class 6-10</li>
+                                    <li>Current Affairs</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-light-bg rounded-xl shadow-lg border-t-4 border-accent-orange">
+                        <h2 class="text-2xl font-bold text-primary-dark mb-4">CSAT:</h2>
+                        <div class="ml-4 space-y-4">
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Quantitative Aptitude:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li><b>Quantitative Aptitude</b> by RS Aggarwal.</li>
+                                    <li>Previous year questions.</li>
+                                </ul>
+                            </div>
+                            
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Logical Reasoning:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li><b>Analytical Reasoning</b> by MK Pandey.</li>
+                                    <li>Previous year questions.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="text-lg font-semibold text-accent-orange">Comprehension:</h3>
+                                <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                    <li>Previous years’ papers.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="p-6 bg-subtle-gray rounded-xl shadow-lg border-t-4 border-cta-yellow">
+                        <h2 class="text-2xl font-bold text-primary-dark mb-4">Current Affairs:</h2>
+                        <div class="ml-4 space-y-2">
+                            <ul class="list-disc list-inside ml-4 text-sm space-y-1">
+                                <li><b>The Hindu/Indian Express</b> newspapers.</li>
+                                <li> Monthly current affairs booklet.</li>
+                                <li><b>PT 365</b> </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                </div>
+            `    
         };
 
         const ALL_SUBJECT_KEYS = {
@@ -1254,6 +1571,67 @@
                 window.scrollTo({ top: 0, behavior: 'smooth' });
             }
         }
+
+        const CONTACT_INFO = {
+            phone: '+91 98765 43210',
+            email: 'info@dilipias.com',
+            telegram: 'https://t.me/dilip_ias_channel',
+            youtube: 'https://www.youtube.com/@dilip_ias_official'
+        };
+
+        const GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/1FAIpQLSfGd55yGqqViOO8RGe3yTkj6T89RKbN_vmgdRWvPzCkneuSFA/viewform";
+
+// --- Helper function to switch views ---
+function switchView(targetId) {
+    // Hide all main content sections
+    const sections = ['main-landing-content', 'notes-detail-view', 'all-notes-list-view', 'pyq-list-view', 'syllabus-view', 'book-list-view', 'admin-edit-view'];
+    sections.forEach(id => {
+        const element = document.getElementById(id);
+        if (element) {
+            element.classList.add('hidden');
+        }
+    });
+
+    // Show the target section
+    const targetElement = document.getElementById(targetId);
+    if (targetElement) {
+        targetElement.classList.remove('hidden');
+        currentView = targetId;
+    }
+    
+    // Scroll to the top of the main content when switching views
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+}
+
+function showMobileContactAlert() {
+             const message = `
+**Contact Dilip IAS**
+
+📞 Phone: ${CONTACT_INFO.phone}
+📧 Email: ${CONTACT_INFO.email}
+✈️ Telegram: ${CONTACT_INFO.telegram}
+▶️ YouTube: ${CONTACT_INFO.youtube}
+
+You can click the links or copy the details!
+             `;
+             alert(message);
+        }
+
+// --- Enrollment Link Function (UPDATED) ---
+
+function openEnrollmentForm() {
+    // Opens the Google Form URL in a new browser tab/window
+    // This is the best method for an external link like a Google Form.
+    window.open(GOOGLE_FORM_URL, '_blank'); 
+    
+    // Note on 'Navigate back to homepage after submission':
+    // Since the form opens in a new tab and is on Google's domain, 
+    // the JavaScript on this page cannot detect the submission or close the new tab.
+    // The user must manually return to the main site after submitting the form.
+}
     </script>
 
 </body>
